@@ -1,0 +1,8 @@
+{
+  "name": "SekolahKu",
+  "app_id": "a547db8d",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
