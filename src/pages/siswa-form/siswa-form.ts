@@ -1,6 +1,6 @@
 import { Siswa } from './../../model/siswa';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the SiswaFormPage page.
@@ -17,18 +17,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class SiswaFormPage {
   public siswa: Siswa
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
     if(this.siswa == undefined) {
       this.siswa = new Siswa()
     }
   }
 
   public simpan() {
-    var siswa = new Siswa()    
+    this.showToast(this.siswa.namaBelakang)    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SiswaFormPage');
+  }
+
+  private showToast(text) {
+    var toast = this.toastCtrl.create({
+      message: text,
+      duration: 3000
+    })
+
+    toast.present()
   }
 
 }

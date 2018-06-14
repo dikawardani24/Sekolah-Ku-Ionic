@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>SiswaForm</ion-title>
     <ion-buttons end>
-        <button ion-button icon-only onclick="simpan()">
+        <button ion-button icon-only (ngSubmit)="simpan()" >
           <ion-icon name="cloud-upload"></ion-icon>
         </button>
   </ion-buttons>
@@ -40,7 +40,7 @@
       <ion-row>
         <ion-item>
           <ion-label floating>No. HP</ion-label>
-          <ion-input type="text" [(ngModel)]="siswa.namaBelakang" name="namaBelakang" required></ion-input>
+          <ion-input type="text" [(ngModel)]="siswa.noHp" name="noHp" required></ion-input>
         </ion-item>
       </ion-row>
 
