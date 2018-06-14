@@ -12,7 +12,33 @@
 
 </ion-header>
 
-
 <ion-content padding>
+  <ion-grid>
+    <ion-row justify-content-center align-items-center>
+      <ion-avatar>
+        <img src="../../assets/icon/favicon.ico">
+      </ion-avatar>
+    </ion-row>
+
+    <ion-row justify-content-center align-items-center margin-top>
+      <h1>Sekolah Ku</h1>
+    </ion-row>
+
+  </ion-grid>
+
+  <form (ngSubmit)="login()">
+
+    <ion-item>
+      <ion-icon name="person" item-start></ion-icon>
+      <ion-input type="text" placeholder="Username..." [(ngModel)]="username" name="username" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="lock" item-start></ion-icon>
+      <ion-input type="password" placeholder="Password..." [(ngModel)]="password" name="password" required></ion-input>
+    </ion-item>
+
+    <button ion-button full large margin-top type="submit">Login</button>
+  </form>
 
 </ion-content>

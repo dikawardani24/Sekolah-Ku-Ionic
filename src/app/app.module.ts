@@ -1,3 +1,5 @@
+import { SiswaFormPage } from './../pages/siswa-form/siswa-form';
+import { LoginPage } from './../pages/login/login';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -9,8 +11,11 @@ import { HomePage } from '../pages/home/home';
 
 @NgModule({
   declarations: [
+
     MyApp,
-    HomePage
+    HomePage, 
+    LoginPage, 
+    SiswaFormPage
   ],
   imports: [
     BrowserModule,
@@ -19,12 +24,14 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage, 
+    SiswaFormPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}

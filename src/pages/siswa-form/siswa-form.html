@@ -1,0 +1,73 @@
+<!--
+  Generated template for the SiswaFormPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>SiswaForm</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only onclick="simpan()">
+          <ion-icon name="cloud-upload"></ion-icon>
+        </button>
+  </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (ngSubmit)="simpan()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>Nama Depan</ion-label>
+            <ion-input type="text" [(ngModel)]="siswa.namaDepan" name="namaDepan" required></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label floating>Nama Belakang</ion-label>
+            <ion-input type="text" [(ngModel)]="siswa.namaBelakang" name="namaBelakang" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-item>
+          <ion-label floating>No. HP</ion-label>
+          <ion-input type="text" [(ngModel)]="siswa.namaBelakang" name="namaBelakang" required></ion-input>
+        </ion-item>
+      </ion-row>
+
+      <ion-row>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="siswa.email" name="email" required></ion-input>
+        </ion-item>
+      </ion-row>
+
+      <ion-row>
+        <ion-item>
+          <ion-label floating>Tgl. Lahir</ion-label>
+          <ion-input type="text" [(ngModel)]="siswa.tglLahir" name="tglLahir" required></ion-input>
+        </ion-item>
+      </ion-row>
+
+      <ion-row>
+        <ion-item>
+          <ion-label floating>Alamat</ion-label>
+          <ion-textarea type="text" [(ngModel)]="siswa.alamat" name="alamat" required></ion-textarea>
+        </ion-item>
+      </ion-row>
+
+      <ion-row margin-top>
+        <button ion-button full large type="submit" text-capitalize>Simpan</button>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
