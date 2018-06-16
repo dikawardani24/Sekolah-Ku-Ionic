@@ -29,6 +29,7 @@ export class SiswaFormPage extends InputPage {
   public tglLahir: string
   public alamat: string
   public gender: string = "Pria"
+  public jenjang: string = "TK"
 
   public loveMembaca: boolean
   public loveMenggambar: boolean
@@ -92,6 +93,7 @@ export class SiswaFormPage extends InputPage {
     siswa.gender = this.gender
     siswa.hobi = this.getSelectedHobies()
     siswa.alamat = this.alamat
+    siswa.jenjang = this.jenjang
   }
 
   private getSelectedHobies(): string {

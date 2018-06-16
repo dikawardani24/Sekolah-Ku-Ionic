@@ -18,93 +18,88 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="confirmAction()">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label floating>Nama Depan</ion-label>
-            <ion-input type="text" [(ngModel)]="namaDepan" name="namaDepan" required></ion-input>
-          </ion-item>
-        </ion-col>
-
-        <ion-col>
-          <ion-item>
-            <ion-label floating>Nama Belakang</ion-label>
-            <ion-input type="text" [(ngModel)]="namaBelakang" name="namaBelakang" required></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
+  <form (ngSubmit)="confirmAction()" margin-right>
+    <ion-row>
+      <ion-col>
         <ion-item>
-          <ion-label floating>No. HP</ion-label>
-          <ion-input type="text" [(ngModel)]="noHp" name="noHp" required></ion-input>
+          <ion-label floating>Nama Depan</ion-label>
+          <ion-input type="text" [(ngModel)]="namaDepan" name="namaDepan" required></ion-input>
         </ion-item>
-      </ion-row>
+      </ion-col>
 
-      <ion-row>
+      <ion-col>
         <ion-item>
-          <ion-label floating>Email</ion-label>
-          <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+          <ion-label floating>Nama Belakang</ion-label>
+          <ion-input type="text" [(ngModel)]="namaBelakang" name="namaBelakang" required></ion-input>
         </ion-item>
-      </ion-row>
 
-      <ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-item>
+      <ion-label floating>No. HP</ion-label>
+      <ion-input type="text" [(ngModel)]="noHp" name="noHp" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Tanggal Lahir</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="tglLahir" name="tglLahir"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Jenjang</ion-label>
+      <ion-select>
+        <ion-option>SD</ion-option>
+        <ion-option>SMP</ion-option>
+        <ion-option>SMA</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-label margin-left>Gender</ion-label>
+    <ion-row radio-group [(ngModel)]="gender" name="gender">
+      <ion-col>
         <ion-item>
-          <ion-label floating>Tanggal Lahir</ion-label>
-          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="tglLahir" name="tglLahir"></ion-datetime>
+          <ion-radio value="Pria"></ion-radio>
+          <ion-label>Pria</ion-label>
         </ion-item>
-      </ion-row>
+      </ion-col>
 
-      <ion-row>
-        <ion-list-header>Gender</ion-list-header>
-        <ion-list radio-group margin-left [(ngModel)]="gender" name="gender">
-          <ion-item>
-            <ion-radio value="Pria"></ion-radio>
-            <ion-label>Pria</ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-radio value="Wanita"></ion-radio>
-            <ion-label>Wanita</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-row>
-
-      <ion-row>
-        <ion-list-header>Hobi</ion-list-header>
-        <ion-list margin-left>
-          <ion-item>
-            <ion-label>Membaca</ion-label>
-            <ion-checkbox value=false [(ngModel)]="loveMembaca" name="loveMembaca"></ion-checkbox>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Menulis</ion-label>
-            <ion-checkbox value=false [(ngModel)]="loveMenulis" name="loveMenulis"></ion-checkbox>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Menggambar</ion-label>
-            <ion-checkbox value=false [(ngModel)]="loveMenggambar" name="loveMenggambar"></ion-checkbox>
-          </ion-item>
-        </ion-list>
-        <ion-item-divider></ion-item-divider>
-      </ion-row>
-
-      <ion-row>
+      <ion-col>
         <ion-item>
-          <ion-label floating>Alamat</ion-label>
-          <ion-textarea type="text" [(ngModel)]="alamat" name="alamat" required></ion-textarea>
+          <ion-radio value="Wanita"></ion-radio>
+          <ion-label>Wanita</ion-label>
         </ion-item>
-      </ion-row>
+      </ion-col>
+    </ion-row>
 
-      <ion-row margin-top>
-        <button ion-button full large type="submit" text-capitalize>Simpan</button>
-      </ion-row>
+    <ion-label margin-left>Hobi</ion-label>
+    <ion-item>
+      <ion-label>Membaca</ion-label>
+      <ion-checkbox value=false [(ngModel)]="loveMembaca" name="loveMembaca"></ion-checkbox>
+    </ion-item>
 
-    </ion-grid>
+    <ion-item>
+      <ion-label>Menulis</ion-label>
+      <ion-checkbox value=false [(ngModel)]="loveMenulis" name="loveMenulis"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Menggambar</ion-label>
+      <ion-checkbox value=false [(ngModel)]="loveMenggambar" name="loveMenggambar"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Alamat</ion-label>
+      <ion-textarea type="text" [(ngModel)]="alamat" name="alamat" required></ion-textarea>
+    </ion-item>
+
   </form>
+
+  <button ion-button margin-top full large type="submit" text-capitalize>Simpan</button>
 
 </ion-content>
