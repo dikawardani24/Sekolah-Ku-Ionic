@@ -23,4 +23,8 @@ export class SiswaDatasource {
     public delete(siswa: Siswa) {
         
     }
+
+    public getAll(): Array<Siswa> {
+        return []
+    }
 }

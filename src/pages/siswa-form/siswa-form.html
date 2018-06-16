@@ -59,14 +59,14 @@
 
       <ion-row>
         <ion-list-header>Gender</ion-list-header>
-        <ion-list radio-group margin-left>
+        <ion-list radio-group margin-left [(ngModel)]="gender" name="gender">
           <ion-item>
             <ion-radio value="Pria"></ion-radio>
             <ion-label>Pria</ion-label>
           </ion-item>
 
           <ion-item>
-            <ion-radio value="Wanita" checked></ion-radio>
+            <ion-radio value="Wanita"></ion-radio>
             <ion-label>Wanita</ion-label>
           </ion-item>
         </ion-list>
@@ -77,17 +77,17 @@
         <ion-list margin-left>
           <ion-item>
             <ion-label>Membaca</ion-label>
-            <ion-checkbox></ion-checkbox>
+            <ion-checkbox value=false [(ngModel)]="loveMembaca" name="loveMembaca"></ion-checkbox>
           </ion-item>
 
           <ion-item>
             <ion-label>Menulis</ion-label>
-            <ion-checkbox></ion-checkbox>
+            <ion-checkbox value=false [(ngModel)]="loveMenulis" name="loveMenulis"></ion-checkbox>
           </ion-item>
 
           <ion-item>
             <ion-label>Menggambar</ion-label>
-            <ion-checkbox></ion-checkbox>
+            <ion-checkbox value=false [(ngModel)]="loveMenggambar" name="loveMenggambar"></ion-checkbox>
           </ion-item>
         </ion-list>
         <ion-item-divider></ion-item-divider>
