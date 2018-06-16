@@ -1,3 +1,4 @@
+import { SiswaListPage } from './../pages/siswa-list/siswa-list';
 import { SiswaFormPage } from './../pages/siswa-form/siswa-form';
 import { LoginPage } from './../pages/login/login';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,14 +8,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 
 @NgModule({
   declarations: [
-
+  
     MyApp,
-    HomePage, 
     LoginPage, 
+    SiswaListPage,
     SiswaFormPage
   ],
   imports: [
@@ -24,8 +24,8 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     LoginPage, 
+    SiswaListPage, 
     SiswaFormPage
   ],
   providers: [

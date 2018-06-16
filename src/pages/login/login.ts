@@ -1,6 +1,6 @@
+import { SiswaListPage } from './../siswa-list/siswa-list';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { SiswaFormPage } from '../siswa-form/siswa-form';
 import { InputPage } from '../abstract-pages';
 
 
@@ -30,8 +30,7 @@ export class LoginPage extends InputPage {
     var granted: boolean = username == 'adminn' && password == 'adminn'
 
     if(granted) {
-      this.showToast('Username : '+username+'\n'+'Password : '+password)
-      this.navCtrl.setRoot(SiswaFormPage)
+      this.navCtrl.setRoot(SiswaListPage)
     } else {
       this.showToast('Username/Password Salah')
     }

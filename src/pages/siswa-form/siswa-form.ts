@@ -19,6 +19,7 @@ import { InputPage } from '../abstract-pages';
   templateUrl: 'siswa-form.html',
 })
 export class SiswaFormPage extends InputPage {
+  public title: string
   public id: number
   public namaDepan: string
   public namaBelakang: string
@@ -204,4 +205,14 @@ export class SiswaFormPage extends InputPage {
 
     return true
   }
+
+  ionViewDidLoad() {
+    super.ionViewDidLoad()
+
+    this.action = this.navParams.get("action")
+    if(this.action == "add_new") this.title = "Tambah Data Siswa"
+    else if(this.action == "update") this.title = "Update Data Siswa"
+    else this.title = "Sekolah Ku"
+  }
 }
+
