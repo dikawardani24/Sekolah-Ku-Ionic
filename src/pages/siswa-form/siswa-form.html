@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>Sekolah Ku</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="simpan()">
+      <button ion-button icon-only (click)="confirmAction()">
         <ion-icon name="cloud-upload"></ion-icon>
       </button>
     </ion-buttons>
@@ -18,7 +18,7 @@
 </ion-header>
 
 <ion-content padding>
-  <form (ngSubmit)="simpan()">
+  <form (ngSubmit)="confirmAction()">
     <ion-grid>
       <ion-row>
         <ion-col>

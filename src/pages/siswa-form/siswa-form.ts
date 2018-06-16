@@ -1,9 +1,10 @@
-import { SiswaDatasource } from './../../model/siswa_service';
-import { Siswa } from './../../model/siswa';
+import { PersonValidatorsHelper } from './../../util/validator-helper';
+import { SiswaDatasource } from './../../services/siswa_service';
+import { Siswa } from './../../models/siswa';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { AlertHelper } from '../../util/component-helper';
 import { StringHelper } from '../../util/string-helper';
+import { InputPage } from '../abstract-pages';
 
 /**
  * Generated class for the SiswaFormPage page.
@@ -17,7 +18,7 @@ import { StringHelper } from '../../util/string-helper';
   selector: 'page-siswa-form',
   templateUrl: 'siswa-form.html',
 })
-export class SiswaFormPage {
+export class SiswaFormPage extends InputPage {
   public id: number
   public namaDepan: string
   public namaBelakang: string
@@ -34,19 +35,10 @@ export class SiswaFormPage {
   public action: string = 'add_new'
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
+    super(navCtrl, navParams, toastCtrl)
   }
 
-
-  public simpan() {
-    if (!this.validateAllInput()) {
-      return
-    }
-
-    if (this.action == undefined) {
-      this.showToast("Gagal memproses permintaan anda")
-      return
-    }
-
+  protected onInputValidated() {
     switch (this.action) {
       case 'add_new':
         this.saveNewData()
@@ -57,6 +49,15 @@ export class SiswaFormPage {
       default:
         this.showToast("NO ACTION")
         break
+    }
+  }
+
+  public confirmAction() {
+    super.confirmAction()
+
+    if (this.action == undefined) {
+      this.showToast("Gagal memproses permintaan anda")
+      return
     }
   }
 
@@ -103,10 +104,11 @@ export class SiswaFormPage {
     return StringHelper.join(", ", hobies)
   }
 
-  private validateAllInput(): boolean {
+  protected validateAllInput(): boolean {
     return this.validateNamaDepan() &&
       this.validateNamaBelakang() &&
       this.validateNoHP() &&
+      this.validateTglLahir() &&
       this.validateEmail() &&
       this.validateAlamat()
   }
@@ -119,7 +121,8 @@ export class SiswaFormPage {
       return false
     }
 
-    if (!this.isNameValid(namaDepan)) {
+    var namaValid = PersonValidatorsHelper.isNameValid(namaDepan)
+    if (!namaValid) {
       this.showToast("Nama depan tidak boleh terdiri dari karakter special dan juga angka")
       return false
     }
@@ -135,7 +138,8 @@ export class SiswaFormPage {
       return false
     }
 
-    if (!this.isNameValid(namaBelakang)) {
+    var namaValid = PersonValidatorsHelper.isNameValid(namaBelakang)
+    if (!namaValid) {
       this.showToast("Nama belakang tidak boleh terdiri dari karakter specialdan juga angka")
       return false
     }
@@ -151,8 +155,8 @@ export class SiswaFormPage {
       return false
     }
 
-
-    if (!this.isOnlyContainNumber(noHp)) {
+    var isOnlyNumber = PersonValidatorsHelper.isOnlyContainNumber(noHp)
+    if (!isOnlyNumber) {
       this.showToast("No. Hp hanya boleh angka")
       return false
     }
@@ -172,16 +176,7 @@ export class SiswaFormPage {
       return false
     }
 
-    var valid = false
-    for (var i = 0; i < email.length; i++) {
-      var char = email.substr(i, 1)
-
-      if (char == '@') {
-        valid = true
-        break
-      }
-    }
-
+    var valid = PersonValidatorsHelper.isEmailValid(email)
     if (!valid) {
       this.showToast("Format email tidak valid")
       return false
@@ -208,27 +203,5 @@ export class SiswaFormPage {
     }
 
     return true
-  }
-
-  private isOnlyContainNumber(text: string) {
-    StringHelper.isOnlyContainNumber(text)
-  }
-
-  private isNameValid(name: string) {
-    const forbiddenChars = '!@#$%^&*()_+=|\/[]?><`~\'\'""1234567890'
-
-    return !StringHelper.isContainForbiddenChar(name, forbiddenChars)
-  }
-
-  private isEmpty(text: string): boolean {
-    return StringHelper.isEmpty(text)
-  }
-
-  private showToast(text) {
-    AlertHelper.showToast(text, this.toastCtrl)
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SiswaFormPage');
   }
 }
