@@ -6,5 +6,7 @@ export class Siswa {
     public noHp: string
     public email: string
     public tglLahir: string
+    public gender: string
+    public hobi: string
     public alamat: string
 }

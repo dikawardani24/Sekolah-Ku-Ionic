@@ -1,5 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { SiswaFormPage } from '../siswa-form/siswa-form';
 
 
 /**
@@ -31,6 +32,7 @@ export class LoginPage {
 
     if(granted) {
       this.showToast('Username : '+username+'\n'+'Password : '+password)
+      this.navCtrl.setRoot(SiswaFormPage)
     } else {
       this.showToast('Username/Password Salah')
     }
