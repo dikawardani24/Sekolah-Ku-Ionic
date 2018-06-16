@@ -1,3 +1,4 @@
+import { SQLite } from '@ionic-native/sqlite';
 import { PersonValidatorsHelper } from './../../util/validator-helper';
 import { SiswaDatasource } from './../../services/siswa_service';
 import { Siswa } from './../../models/siswa';
@@ -35,7 +36,7 @@ export class SiswaFormPage extends InputPage {
 
   public action: string = 'add_new'
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public sqlite: SQLite) {
     super(navCtrl, navParams, toastCtrl)
   }
 
@@ -66,7 +67,7 @@ export class SiswaFormPage extends InputPage {
     var siswa = new Siswa()
     this.initData(siswa)
 
-    var datasource = new SiswaDatasource()
+    var datasource = new SiswaDatasource(this.sqlite)
     datasource.update(siswa)
 
     this.showToast("Update data berhasil")
@@ -76,8 +77,8 @@ export class SiswaFormPage extends InputPage {
     var siswa = new Siswa()
     this.initData(siswa)
 
-    var datasource = new SiswaDatasource()
-    datasource.simpan(siswa)
+    var datasource = new SiswaDatasource(this.sqlite)
+    datasource.save(siswa)
 
     this.showToast("SAVED !!! " + siswa.hobi)
   }

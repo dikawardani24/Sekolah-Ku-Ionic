@@ -1,3 +1,5 @@
+import { SQLite } from '@ionic-native/sqlite';
+import { SiswaDatasource } from './../../services/siswa_service';
 import { SiswaFormPage } from './../siswa-form/siswa-form';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -16,7 +18,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SiswaListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sqlite: SQLite) {
   }
 
   public startAddSiswaPage() {
@@ -27,6 +29,17 @@ export class SiswaListPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SiswaListPage');
+
+    try {
+      var datasource = new SiswaDatasource(this.sqlite)
+      var siswaList = datasource.getAll()
+
+      siswaList.forEach(siswa => {
+        console.log(siswa.namaDepan)
+      });
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 }
