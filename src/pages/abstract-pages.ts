@@ -11,9 +11,12 @@ export abstract class InputPage {
     protected abstract onInputValidated()
 
     public confirmAction() {
-        if(!this.validateAllInput) return
+        var valid = this.validateAllInput()
 
-        this.onInputValidated()
+        console.log(valid)
+        if(valid) {
+            this.onInputValidated()
+        }
     }
 
     protected isEmpty(text: string): boolean {
