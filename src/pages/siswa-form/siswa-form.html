@@ -48,15 +48,16 @@
 
     <ion-item>
       <ion-label floating>Tanggal Lahir</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="tglLahir" name="tglLahir"></ion-datetime>
+      <ion-datetime displayFormat="DD/MMMM/YYYY" [(ngModel)]="tglLahir" name="tglLahir"></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label>Jenjang</ion-label>
-      <ion-select>
-        <ion-option>SD</ion-option>
-        <ion-option>SMP</ion-option>
-        <ion-option>SMA</ion-option>
+      <ion-select [(ngModel)]="jenjang" name="jenjang">
+        <ion-option value="TK">TK</ion-option>
+        <ion-option value="SD">SD</ion-option>
+        <ion-option value="SMP">SMP</ion-option>
+        <ion-option value="SMA">SMA</ion-option>
       </ion-select>
     </ion-item>
 

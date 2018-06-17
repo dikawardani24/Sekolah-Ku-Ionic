@@ -1,4 +1,4 @@
-import { SQLite } from '@ionic-native/sqlite';
+import { SiswaListPage } from './../siswa-list/siswa-list';
 import { PersonValidatorsHelper } from './../../util/validator-helper';
 import { SiswaDatasource } from './../../services/siswa_service';
 import { Siswa } from './../../models/siswa';
@@ -37,7 +37,7 @@ export class SiswaFormPage extends InputPage {
 
   public action: string = 'add_new'
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public sqlite: SQLite) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
     super(navCtrl, navParams, toastCtrl)
   }
 
@@ -56,32 +56,44 @@ export class SiswaFormPage extends InputPage {
   }
 
   public confirmAction() {
-    super.confirmAction()
-
     if (this.action == undefined) {
       this.showToast("Gagal memproses permintaan anda")
       return
     }
+
+    super.confirmAction()
   }
 
   private updateData() {
     var siswa = new Siswa()
     this.initData(siswa)
 
-    var datasource = new SiswaDatasource(this.sqlite)
-    datasource.update(siswa)
+    try {
+      var datasource = new SiswaDatasource()
+      datasource.update(siswa)
 
-    this.showToast("Update data berhasil")
+      this.showToast("Data berhasil diperbaharui")
+      this.navCtrl.setRoot(SiswaListPage)
+    } catch (error) {
+      this.showToast("Data gagal diperbaharui")
+      console.log(error)
+    }
   }
 
   private saveNewData() {
     var siswa = new Siswa()
     this.initData(siswa)
 
-    var datasource = new SiswaDatasource(this.sqlite)
-    datasource.save(siswa)
+    try {
+      var datasource = new SiswaDatasource()
+      datasource.save(siswa)
 
-    this.showToast("SAVED !!! " + siswa.hobi)
+      this.showToast("Data berhasil disimpan !!! " + siswa.hobi)
+      this.navCtrl.setRoot(SiswaListPage)
+    } catch (error) {
+      this.showToast("Data gagal disimpan")
+      console.log(error)
+    }
   }
 
   private initData(siswa: Siswa) {
@@ -213,8 +225,8 @@ export class SiswaFormPage extends InputPage {
     super.ionViewDidLoad()
 
     this.action = this.navParams.get("action")
-    if(this.action == "add_new") this.title = "Tambah Data Siswa"
-    else if(this.action == "update") this.title = "Update Data Siswa"
+    if (this.action == "add_new") this.title = "Tambah Data Siswa"
+    else if (this.action == "update") this.title = "Update Data Siswa"
     else this.title = "Sekolah Ku"
   }
 }

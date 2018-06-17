@@ -1,3 +1,4 @@
+import { DetailSiswaPage } from './../pages/detail-siswa/detail-siswa';
 import { SiswaListPage } from './../pages/siswa-list/siswa-list';
 import { SiswaFormPage } from './../pages/siswa-form/siswa-form';
 import { LoginPage } from './../pages/login/login';
@@ -16,7 +17,8 @@ import { MyApp } from './app.component';
     MyApp,
     LoginPage, 
     SiswaListPage,
-    SiswaFormPage
+    SiswaFormPage, 
+    DetailSiswaPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { MyApp } from './app.component';
     MyApp,
     LoginPage, 
     SiswaListPage, 
-    SiswaFormPage
+    SiswaFormPage, 
+    DetailSiswaPage
   ],
   providers: [
     StatusBar,

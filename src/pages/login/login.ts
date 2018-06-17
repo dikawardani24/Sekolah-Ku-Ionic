@@ -29,6 +29,9 @@ export class LoginPage extends InputPage {
     var password = this.password
     var granted: boolean = username == 'adminn' && password == 'adminn'
 
+    console.log("Username : ", username)
+    console.log("Password : ", password)
+    console.log("Is Granted ? ", granted)
     if(granted) {
       this.navCtrl.setRoot(SiswaListPage)
     } else {

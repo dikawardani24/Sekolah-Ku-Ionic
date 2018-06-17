@@ -13,7 +13,7 @@ export abstract class InputPage {
     public confirmAction() {
         var valid = this.validateAllInput()
 
-        console.log(valid)
+        console.log("Is All Input Valid ? ", valid)
         if(valid) {
             this.onInputValidated()
         }
@@ -28,6 +28,6 @@ export abstract class InputPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad SiswaFormPage');
-      }
+        console.log('ionViewDidLoad Page');
+    }
 }
