@@ -65,7 +65,7 @@ export class SiswaFormPage extends InputPage {
   }
 
   private updateData() {
-    var siswa = new Siswa()
+    var siswa = this.navParams.get("siswa")
     this.initData(siswa)
 
     try {
@@ -221,12 +221,32 @@ export class SiswaFormPage extends InputPage {
     return true
   }
 
+  private viewOldDataSiswa() {
+    var siswa:Siswa = this.navParams.get("siswa")
+    this.namaDepan = siswa.namaDepan
+    this.namaBelakang = siswa.namaBelakang
+    this.noHp = siswa.noHp
+    this.email = siswa.email
+    this.tglLahir = siswa.tglLahir
+    this.alamat = siswa.alamat
+    this.gender = siswa.gender
+    this.jenjang = siswa.jenjang
+
+    var hobi = siswa.hobi
+    if (hobi.indexOf("Membaca") >= 0) this.loveMembaca = true
+    if (hobi.indexOf("Menulis") >= 0) this.loveMenulis = true
+    if (hobi.indexOf("Menggambar") >= 0) this.loveMenggambar = true
+  }
+
   ionViewDidLoad() {
     super.ionViewDidLoad()
 
     this.action = this.navParams.get("action")
     if (this.action == "add_new") this.title = "Tambah Data Siswa"
-    else if (this.action == "update") this.title = "Update Data Siswa"
+    else if (this.action == "update") {
+      this.title = "Update Data Siswa"
+      this.viewOldDataSiswa()
+    }
     else this.title = "Sekolah Ku"
   }
 }

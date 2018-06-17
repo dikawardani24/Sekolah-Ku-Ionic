@@ -18,7 +18,7 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="confirmAction()" margin-right>
+  <form margin-right>
     <ion-row>
       <ion-col>
         <ion-item>
@@ -101,6 +101,6 @@
 
   </form>
 
-  <button ion-button margin-top full large type="submit" text-capitalize>Simpan</button>
+  <button ion-button margin-top full large (click)="confirmAction()"  text-capitalize>Simpan</button>
 
 </ion-content>

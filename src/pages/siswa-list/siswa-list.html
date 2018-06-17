@@ -19,5 +19,38 @@
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let siswa of siswaList; let i=index">
+      <ion-item (click)="viewDetailSiswa(siswa)">
+        <ion-icon name="person" item-start></ion-icon>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>{{siswa.namaDepan+" "+siswa.namaBelakang}}</h1>
+            </ion-col>
+            <ion-col text-right>{{siswa.jenjang}}</ion-col>
+          </ion-row>
 
+          <ion-row>
+            <ion-col>{{siswa.gender}}</ion-col>
+            <ion-col text-right>{{siswa.noHp}}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button icon color="danger" (click)="deleteData(siswa)">
+          <ion-icon name="trash"></ion-icon>
+          Hapus
+        </button>
+      </ion-item-options>
+
+      <ion-item-options side="left">
+        <button ion-button color="primary" (click)="startUpdatePageOf(siswa)">
+          <ion-icon name="paper"></ion-icon>
+          Update
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

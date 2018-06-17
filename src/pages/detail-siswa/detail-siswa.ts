@@ -1,3 +1,4 @@
+import { Siswa } from './../../models/siswa';
 import { SiswaDatasource } from './../../services/siswa_service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -15,8 +16,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'detail-siswa.html',
 })
 export class DetailSiswaPage {
+  public siswa: Siswa
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.siswa = navParams.get("siswa")
+    console.log("Data received : ", JSON.stringify(this.siswa))
   }
 
   ionViewDidLoad() {
