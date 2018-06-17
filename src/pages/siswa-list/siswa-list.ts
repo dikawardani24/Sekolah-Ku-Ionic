@@ -3,7 +3,7 @@ import { Siswa } from './../../models/siswa';
 import { SiswaDatasource, RunOnPromise } from './../../services/siswa_service';
 import { SiswaFormPage } from './../siswa-form/siswa-form';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the SiswaListPage page.
@@ -20,7 +20,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class SiswaListPage {
   public siswaList: Array<Siswa> = []
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
   private loadData() {
@@ -54,7 +54,30 @@ export class SiswaListPage {
   }
 
   public deleteData(siswa: Siswa) {
-    
+    var fullName = siswa.namaDepan+" "+siswa.namaBelakang
+    const prompt = this.alertCtrl.create({
+      title: 'Hapus Data Siswa',
+      message: "Apakah anda yakin akan menghapus data siswa dengan nama : "+fullName,
+      buttons: [
+        {
+          text: 'Batal',
+          handler: data => {
+            console.log('Batal clicked');
+          }
+        },
+        {
+          text: 'Hapus',
+          handler: data => {
+            console.log('Hapus clicked');
+            var dataSource = new SiswaDatasource()
+            dataSource.delete(siswa)
+            var index = this.siswaList.indexOf(siswa)
+            this.siswaList.splice(index, 1)
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   public viewDetailSiswa(siswa: Siswa) {

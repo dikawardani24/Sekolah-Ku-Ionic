@@ -50,14 +50,14 @@ export class SiswaFormPage extends InputPage {
         this.updateData()
         break
       default:
-        this.showToast("NO ACTION")
+        this.showBottomToast("NO ACTION")
         break
     }
   }
 
   public confirmAction() {
     if (this.action == undefined) {
-      this.showToast("Gagal memproses permintaan anda")
+      this.showBottomToast("Gagal memproses permintaan anda")
       return
     }
 
@@ -72,10 +72,10 @@ export class SiswaFormPage extends InputPage {
       var datasource = new SiswaDatasource()
       datasource.update(siswa)
 
-      this.showToast("Data berhasil diperbaharui")
+      this.showBottomToast("Data berhasil diperbaharui")
       this.navCtrl.setRoot(SiswaListPage)
     } catch (error) {
-      this.showToast("Data gagal diperbaharui")
+      this.showBottomToast("Data gagal diperbaharui")
       console.log(error)
     }
   }
@@ -88,10 +88,10 @@ export class SiswaFormPage extends InputPage {
       var datasource = new SiswaDatasource()
       datasource.save(siswa)
 
-      this.showToast("Data berhasil disimpan !!! " + siswa.hobi)
+      this.showBottomToast("Data berhasil disimpan !!! " + siswa.hobi)
       this.navCtrl.setRoot(SiswaListPage)
     } catch (error) {
-      this.showToast("Data gagal disimpan")
+      this.showBottomToast("Data gagal disimpan")
       console.log(error)
     }
   }
@@ -133,13 +133,13 @@ export class SiswaFormPage extends InputPage {
     var namaDepan = this.namaDepan
 
     if (this.isEmpty(namaDepan)) {
-      this.showToast("Nama depan masih kosong")
+      this.showBottomToast("Nama depan masih kosong")
       return false
     }
 
     var namaValid = PersonValidatorsHelper.isNameValid(namaDepan)
     if (!namaValid) {
-      this.showToast("Nama depan tidak boleh terdiri dari karakter special dan juga angka")
+      this.showBottomToast("Nama depan tidak boleh terdiri dari karakter special dan juga angka")
       return false
     }
 
@@ -150,13 +150,13 @@ export class SiswaFormPage extends InputPage {
     var namaBelakang = this.namaBelakang
 
     if (this.isEmpty(namaBelakang)) {
-      this.showToast("Nama belakang masih kosong")
+      this.showBottomToast("Nama belakang masih kosong")
       return false
     }
 
     var namaValid = PersonValidatorsHelper.isNameValid(namaBelakang)
     if (!namaValid) {
-      this.showToast("Nama belakang tidak boleh terdiri dari karakter specialdan juga angka")
+      this.showBottomToast("Nama belakang tidak boleh terdiri dari karakter specialdan juga angka")
       return false
     }
 
@@ -167,18 +167,18 @@ export class SiswaFormPage extends InputPage {
     var noHp = this.noHp
 
     if (this.isEmpty(noHp)) {
-      this.showToast("No. HP masih kosong")
+      this.showBottomToast("No. HP masih kosong")
       return false
     }
 
     var isOnlyNumber = PersonValidatorsHelper.isOnlyContainNumber(noHp)
     if (!isOnlyNumber) {
-      this.showToast("No. Hp hanya boleh angka")
+      this.showBottomToast("No. Hp hanya boleh angka")
       return false
     }
 
     if (noHp.length < 12) {
-      this.showToast("No. HP tidak valid")
+      this.showBottomToast("No. HP tidak valid")
       return false
     }
 
@@ -188,13 +188,13 @@ export class SiswaFormPage extends InputPage {
   private validateEmail(): boolean {
     var email = this.email;
     if (this.isEmpty(email)) {
-      this.showToast("Email masih kosong")
+      this.showBottomToast("Email masih kosong")
       return false
     }
 
     var valid = PersonValidatorsHelper.isEmailValid(email)
     if (!valid) {
-      this.showToast("Format email tidak valid")
+      this.showBottomToast("Format email tidak valid")
       return false
     }
 
@@ -204,7 +204,7 @@ export class SiswaFormPage extends InputPage {
   private validateTglLahir(): boolean {
     var tglLahir = this.tglLahir
     if (this.isEmpty(tglLahir)) {
-      this.showToast("Tanggal lahir masih kosong")
+      this.showBottomToast("Tanggal lahir masih kosong")
       return false
     }
 
@@ -214,7 +214,7 @@ export class SiswaFormPage extends InputPage {
   private validateAlamat(): boolean {
     var alamat = this.alamat
     if (this.isEmpty(alamat)) {
-      this.showToast("Alamat masih kosong")
+      this.showBottomToast("Alamat masih kosong")
       return false
     }
 

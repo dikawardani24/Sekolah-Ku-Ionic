@@ -35,7 +35,7 @@ export class LoginPage extends InputPage {
     if(granted) {
       this.navCtrl.setRoot(SiswaListPage)
     } else {
-      this.showToast('Username/Password Salah')
+      this.showBottomToast('Username/Password Salah')
     }
   }
 
@@ -47,7 +47,7 @@ export class LoginPage extends InputPage {
     var username = this.username
 
     if(this.isEmpty(username)) {
-      this.showToast('Username masih kosong')
+      this.showBottomToast('Username masih kosong')
       return false
     } 
 
@@ -58,12 +58,12 @@ export class LoginPage extends InputPage {
     var password = this.password
 
     if(this.isEmpty(password)) {
-      this.showToast('Password masih kosong')
+      this.showBottomToast('Password masih kosong')
       return false
     }
 
     if(password.length < 6) {
-      this.showToast("Password adalah 6 karakter atau lebih")
+      this.showBottomToast("Password adalah 6 karakter atau lebih")
       return false
     }
 

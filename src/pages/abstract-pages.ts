@@ -23,8 +23,12 @@ export abstract class InputPage {
         return StringHelper.isEmpty(text)
     }
 
-    protected showToast(text: string) {
-        AlertHelper.showToast(text, this.toastCtrl)
+    protected showBottomToast(text: string) {
+        AlertHelper.showBottomToast(text, this.toastCtrl)
+    }
+
+    protected showMiddleToast(text: string) {
+        AlertHelper.showUpToast(text, this.toastCtrl)
     }
 
     ionViewDidLoad() {
