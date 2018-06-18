@@ -1,3 +1,12 @@
 page-login {
-
+    .header-logo {
+        background-color: map-get($colors, primary);
+        padding-top: 50px;
+        padding-bottom: 50px;
+        border-bottom-left-radius: 150px;
+        border-bottom-right-radius: 150px;
+        color: map-get($colors, light);
+        font-size: 30pt;
+        font-style: bold
+    }
 }

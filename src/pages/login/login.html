@@ -6,39 +6,43 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Login</ion-title>
+  <ion-navbar >
+    <ion-title >Login</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content padding>
-  <ion-grid>
+<ion-content>
+  <ion-grid class="header-logo">
     <ion-row justify-content-center align-items-center>
       <ion-avatar>
         <img src="./assets/icon/favicon.ico">
       </ion-avatar>
     </ion-row>
 
-    <ion-row justify-content-center align-items-center margin-top>
-      <h1>Sekolah Ku</h1>
+    <ion-row class="header-label" justify-content-center align-items-center margin-top>
+      Sekolah Ku
     </ion-row>
 
   </ion-grid>
 
-  <form (ngSubmit)="confirmAction()">
+  <form (ngSubmit)="confirmAction()" padding>
 
     <ion-item>
-      <ion-icon name="person" item-start></ion-icon>
+      <ion-avatar item-start>
+        <img src="./assets/icon/ic_action_person.png">
+      </ion-avatar>
       <ion-input type="text" placeholder="Username..." [(ngModel)]="username" name="username" required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-icon name="lock" item-start></ion-icon>
+      <ion-avatar item-start>
+        <img src="./assets/icon/ic_action_lock.png">
+      </ion-avatar>
       <ion-input type="password" placeholder="Password..." [(ngModel)]="password" name="password" required></ion-input>
     </ion-item>
 
-    <button ion-button full large margin-top type="submit">Login</button>
+    <button ion-button class="my-button" full large margin-top type="submit">Login</button>
   </form>
 
 </ion-content>

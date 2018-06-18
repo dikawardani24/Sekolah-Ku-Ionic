@@ -3,7 +3,7 @@ import { Siswa } from './../models/siswa';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 export class DatabaseHelper {
-    public createTables() {
+    public createTables(runOnPromise: RunOnPromise<Boolean>) {
         const queryCreateTableSiswa = 'CREATE TABLE IF NOT EXISTS siswa(' +
             '_id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
             'nama_depan TEXT, ' +
@@ -20,8 +20,10 @@ export class DatabaseHelper {
             db.executeSql(queryCreateTableSiswa, {})
                 .then((result) => {
                     console.log("Table Created: ", this.stringfy(result))
+                    runOnPromise.run(true)
                 }, (error) => {
                     console.error("Unable to execute sql", this.stringfy(error))
+                    runOnPromise.run(false)
                 })
 
         }, (error) => {

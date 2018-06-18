@@ -167,7 +167,7 @@ export class SiswaFormPage extends InputPage {
     var noHp = this.noHp
 
     if (this.isEmpty(noHp)) {
-      this.showBottomToast("No. HP masih kosong")
+      this.showMiddleToast("No. HP masih kosong")
       return false
     }
 

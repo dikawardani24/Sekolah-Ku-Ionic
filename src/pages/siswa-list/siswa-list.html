@@ -22,7 +22,9 @@
   <ion-list>
     <ion-item-sliding *ngFor="let siswa of siswaList; let i=index">
       <ion-item (click)="viewDetailSiswa(siswa)">
-        <ion-icon name="person" item-start></ion-icon>
+        <ion-avatar item-start>
+          <img src="./assets/icon/ic_action_person.png"/>
+        </ion-avatar>
         <ion-grid>
           <ion-row>
             <ion-col>

@@ -1,5 +1,4 @@
 import { Siswa } from './../../models/siswa';
-import { SiswaDatasource } from './../../services/siswa_service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
