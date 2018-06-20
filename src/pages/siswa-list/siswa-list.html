@@ -18,7 +18,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-searchbar ng-value="Dik"  (ionInput)="findSiswaByNama($event)">
+  <ion-searchbar placeholder="Cari Data Siswa..." (ionInput)="findSiswaByNama($event)">
   </ion-searchbar>
   <ion-list>
     <ion-item-sliding *ngFor="let siswa of siswaList; let i=index">
