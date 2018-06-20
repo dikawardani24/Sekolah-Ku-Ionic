@@ -3,7 +3,8 @@ import { NavController, NavParams, ToastController } from "ionic-angular";
 import { StringHelper } from "../util/string-helper";
 
 export abstract class InputPage {
-    constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
+    constructor(protected navCtrl: NavController, protected navParams: NavParams, 
+        private toastCtrl: ToastController) {
         
     }
 

@@ -1,173 +1,70 @@
-import { RunOnPromise } from './siswa_service';
+import { RunOnPromise } from './database_helper';
 import { Siswa } from './../models/siswa';
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { AbstractDatasource } from './abstract_datasource';
 
-export class DatabaseHelper {
-    public createTables(runOnPromise: RunOnPromise<Boolean>) {
-        const queryCreateTableSiswa = 'CREATE TABLE IF NOT EXISTS siswa(' +
-            '_id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
-            'nama_depan TEXT, ' +
-            'nama_belakang TEXT, ' +
-            'no_hp TEXT, ' +
-            'email TEXT, ' +
-            'tgl_lahir TEXT, ' +
-            'jenjang TEXT, ' +
-            'gender TEXT, ' +
-            'hobi TEXT, ' +
-            'alamat TEXT)'
-
-        this.open().then((db: SQLiteObject) => {
-            db.executeSql(queryCreateTableSiswa, {})
-                .then((result) => {
-                    console.log("Table Created: ", this.stringfy(result))
-                    runOnPromise.run(true)
-                }, (error) => {
-                    console.error("Unable to execute sql", this.stringfy(error))
-                    runOnPromise.run(false)
-                })
-
-        }, (error) => {
-            console.error("Unable to open database", this.stringfy(error))
-        })
-    }
-
-    public open(): Promise<SQLiteObject> {
-        let sqlite = new SQLite()
-        return sqlite.create({
-            name: 'sekolah_ku.db',
-            location: 'default'
-        })
-    }
-
-    public stringfy(object): string {
-        return JSON.stringify(object)
-    }
-}
-
-export class SiswaDatasource {
-    private TABLE_NAME = 'siswa'
-    private helper: DatabaseHelper
+export class SiswaDatasource extends AbstractDatasource<Siswa>{
 
     constructor() {
-        this.helper = new DatabaseHelper()
+        super("siswa")
     }
 
-    private open(): Promise<SQLiteObject> {
-        return this.helper.open()
+    public save(siswa: Siswa, runOnPromise: RunOnPromise<Boolean>) {
+        const queryInsert = 'INSERT INTO ' + this.tableName +
+            '(nama_depan, ' +
+            'nama_belakang, ' +
+            'no_hp, ' +
+            'email, ' +
+            'tgl_lahir, ' +
+            'jenjang, ' +
+            'gender, ' +
+            'hobi, ' +
+            'alamat) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)'
+
+        const parameters = this.convertToArray(siswa)
+        this.doManiPulate(queryInsert, parameters, runOnPromise)
     }
 
-    public save(siswa: Siswa) {
-        this.open().then((db: SQLiteObject) => {
-            const queryInsert = 'INSERT INTO ' + this.TABLE_NAME +
-                '(nama_depan, ' +
-                'nama_belakang, ' +
-                'no_hp, ' +
-                'email, ' +
-                'tgl_lahir, ' +
-                'jenjang, ' +
-                'gender, ' +
-                'hobi, ' +
-                'alamat) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    public update(siswa: Siswa, runOnPromise: RunOnPromise<Boolean>) {
+        const queryUpdate = 'UPDATE ' + this.tableName + ' SET ' +
+            'nama_depan=?, ' +
+            'nama_belakang=?, ' +
+            'no_hp=?, ' +
+            'email=?, ' +
+            'tgl_lahir=?, ' +
+            'jenjang=?, ' +
+            'gender=?, ' +
+            'hobi=?, ' +
+            'alamat=? WHERE _id=?'
 
-            const parameters = this.convertToArray(siswa)
-            db.executeSql(queryInsert, parameters)
-                .then((result) => {
-                    console.log("Data siswa is inserted : ", this.stringFy(result))
-                }, (error) => {
-                    console.error("Couldn't save data siswa : ", this.stringFy(error))
-                })
-        }, (error) => {
-            console.error("Couldn't open database : ", JSON.stringify(error))
-        })
+        const parameters = this.convertToArray(siswa)
+        parameters.push(siswa.id)
+        this.doManiPulate(queryUpdate, parameters, runOnPromise)
     }
 
-    public update(siswa: Siswa) {
-        this.open().then((db: SQLiteObject) => {
-            const queryUpdate = 'UPDATE ' + this.TABLE_NAME + ' SET ' +
-                'nama_depan=?, ' +
-                'nama_belakang=?, ' +
-                'no_hp=?, ' +
-                'email=?, ' +
-                'tgl_lahir=?, ' +
-                'jenjang=?, ' +
-                'gender=?, ' +
-                'hobi=?, ' +
-                'alamat=? WHERE _id=?'
-            const parameters = this.convertToArray(siswa)
-            parameters.push(siswa.id)
+    public delete(siswa: Siswa, runOnPromise: RunOnPromise<Boolean>) {
+        const queryDelete = "DELETE FROM " + this.tableName +
+            ' WHERE _id=?'
+        var params = [siswa.id]
 
-            db.executeSql(queryUpdate, parameters).then((result) => {
-                console.log("Data siswa is updated : ", this.stringFy(result))
-            }, (error) => {
-                console.error("Couldn't update data siswa : ", this.stringFy(error))
-            })
-        }, (error) => {
-            console.error("Couldn't open database : ", JSON.stringify(error))
-        })
+        this.doManiPulate(queryDelete, params, runOnPromise)
     }
 
-    public delete(siswa: Siswa) {
-        this.open().then((db: SQLiteObject) => {
-            const queryDelete = "DELETE FROM " + this.TABLE_NAME +
-                ' WHERE _id=?'
-            db.executeSql(queryDelete, [siswa.id]).then((result) => {
-                console.log("Data siswa is deleted : ", this.stringFy(result))
-            }, (error) => {
-                console.error("Couldn't delete data siswa : ", this.stringFy(error))
-            })
-        }, (error) => {
-            console.error("Couldn't open database : ", JSON.stringify(error))
-        })
+    public findById(id: number, runOnPromise: RunOnPromise<Siswa>) {
+        const queryFindById = "SELECT * FROM " + this.tableName +
+            " WHERE _id=?"
+
+        this.fetchSingle(queryFindById, [id], runOnPromise)
     }
 
-    public findBy(id: number): Siswa {
-        var siswa: Siswa = undefined
+    public findsByName(nama: string, runOnPromise: RunOnPromise<Array<Siswa>>) {
+        const queryFindByName = "SELECT *FROM " + this.tableName +
+            " WHERE nama_depan LIKE ? OR nama_belakang LIKE ?"
+        var params = ["%" + nama + "%", "%" + nama + "%"]
 
-        this.open().then((db: SQLiteObject) => {
-            const queryFindById = "SELECT * FROM " + this.TABLE_NAME +
-                " WHERE _id=?"
-            db.executeSql(queryFindById, [id]).then(result => {
-                const received = result.rows.length > 0
-                console.log("Is receiving data ? ", received)
-                if(received) {
-                    var item = result.rows.item(0)
-                    console.log("Data : ", this.stringFy(item))
-                    siswa =  this.fetchRow(item)
-                }
-            }, (error) => {
-                console.error("Couldnt fetch data by id : ", this.stringFy(error))
-            })
-        }, (error) => {
-            console.error("Couldn't open database : ", this.stringFy(error))
-        })
-        return siswa
+        this.fetchToList(queryFindByName, params, runOnPromise)
     }
 
-    public getAll(runOnPromise: RunOnPromise<Array<Siswa>>) {
-        this.open().then((db: SQLiteObject) => {
-            const queryGetAll = "SELECT *FROM " + this.TABLE_NAME
-            db.executeSql(queryGetAll, {}).then(res => {
-                var totalFetcthData = res.rows.length
-                console.log("Total fetcthed data : ", totalFetcthData)
-
-                var siswaList = []
-                for (var i = 0; i < res.rows.length; i++) {
-                    var item = res.rows.item(i)
-                    var siswa = this.fetchRow(item)
-
-                    siswaList.push(siswa)
-                }
-                console.log("Total data converted : ", siswaList.length)
-                runOnPromise.run(siswaList)
-            }, (error) => {
-                console.error("Couldn't load data siswa : ", this.stringFy(error))
-            })
-        }, (error) => {
-            console.error("Couldn't open database : ", this.stringFy(error))
-        })
-    }
-
-    private fetchRow(item): Siswa {
+    protected fetchRow(item): Siswa {
         var siswa = new Siswa()
 
         siswa.id = item._id
@@ -184,7 +81,7 @@ export class SiswaDatasource {
         return siswa
     }
 
-    private convertToArray(siswa: Siswa): Array<any> {
+    protected convertToArray(siswa: Siswa): Array<any> {
         return [
             siswa.namaDepan,
             siswa.namaBelakang,
@@ -197,12 +94,4 @@ export class SiswaDatasource {
             siswa.alamat
         ]
     }
-
-    private stringFy(object): string {
-        return this.helper.stringfy(object)
-    }
-}
-
-export interface RunOnPromise<T> {
-    run(data: T)
 }

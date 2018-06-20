@@ -17,7 +17,6 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-list>
     <ion-item-sliding *ngFor="let siswa of siswaList; let i=index">
@@ -41,7 +40,7 @@
       </ion-item>
 
       <ion-item-options side="right">
-        <button ion-button icon color="danger" (click)="deleteData(siswa)">
+        <button ion-button icon color="danger" (click)="showConfirmationDelete(siswa)">
           <ion-icon name="trash"></ion-icon>
           Hapus
         </button>

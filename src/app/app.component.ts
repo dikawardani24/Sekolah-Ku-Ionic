@@ -1,4 +1,4 @@
-import { DatabaseHelper, RunOnPromise } from './../services/siswa_service';
+import { DatabaseHelper, RunOnPromise } from './../services/database_helper';
 import { LoginPage } from './../pages/login/login';
 import { Component } from '@angular/core';
 import { Platform, AlertController } from 'ionic-angular';

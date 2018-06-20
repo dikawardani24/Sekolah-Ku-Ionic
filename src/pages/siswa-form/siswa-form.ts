@@ -37,7 +37,7 @@ export class SiswaFormPage extends InputPage {
 
   public action: string = 'add_new'
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
+  constructor(navCtrl: NavController, navParams: NavParams, toastCtrl: ToastController) {
     super(navCtrl, navParams, toastCtrl)
   }
 
@@ -68,32 +68,36 @@ export class SiswaFormPage extends InputPage {
     var siswa = this.navParams.get("siswa")
     this.initData(siswa)
 
-    try {
-      var datasource = new SiswaDatasource()
-      datasource.update(siswa)
-
-      this.showBottomToast("Data berhasil diperbaharui")
-      this.navCtrl.setRoot(SiswaListPage)
-    } catch (error) {
-      this.showBottomToast("Data gagal diperbaharui")
-      console.log(error)
-    }
+    var self = this
+    var datasource = new SiswaDatasource()
+    datasource.update(siswa, {
+      run(isUpdated: Boolean) {
+        if (isUpdated) {
+          self.showBottomToast("Data berhasil diperbaharui")
+          self.navCtrl.setRoot(SiswaListPage)
+        } else {
+          self.showBottomToast("Data gagal diperbaharui")
+        }
+      }
+    })
   }
 
   private saveNewData() {
     var siswa = new Siswa()
     this.initData(siswa)
 
-    try {
-      var datasource = new SiswaDatasource()
-      datasource.save(siswa)
-
-      this.showBottomToast("Data berhasil disimpan !!! " + siswa.hobi)
-      this.navCtrl.setRoot(SiswaListPage)
-    } catch (error) {
-      this.showBottomToast("Data gagal disimpan")
-      console.log(error)
-    }
+    var self = this
+    var datasource = new SiswaDatasource()
+      datasource.save(siswa, {
+        run(isSaved: Boolean) {
+          if(isSaved) {
+            self.showBottomToast("Data berhasil disimpan !!! " + siswa.hobi)
+            self.navCtrl.setRoot(SiswaListPage)
+          } else {
+            self.showBottomToast("Data gagal disimpan")
+          }
+        } 
+      })
   }
 
   private initData(siswa: Siswa) {
@@ -222,7 +226,7 @@ export class SiswaFormPage extends InputPage {
   }
 
   private viewOldDataSiswa() {
-    var siswa:Siswa = this.navParams.get("siswa")
+    var siswa: Siswa = this.navParams.get("siswa")
     this.namaDepan = siswa.namaDepan
     this.namaBelakang = siswa.namaBelakang
     this.noHp = siswa.noHp

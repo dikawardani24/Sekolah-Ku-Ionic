@@ -1,6 +1,6 @@
 import { Siswa } from './../../models/siswa';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the DetailSiswaPage page.
@@ -17,7 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class DetailSiswaPage {
   public siswa: Siswa
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(navParams: NavParams) {
     this.siswa = navParams.get("siswa")
     console.log("Data received : ", JSON.stringify(this.siswa))
   }
