@@ -19,10 +19,23 @@ import { IonicPage, NavController, AlertController, ToastController } from 'ioni
   templateUrl: 'siswa-list.html',
 })
 export class SiswaListPage {
+  public dika = "Cari Siswa..."
   public siswaList: Array<Siswa> = []
 
   constructor(private navCtrl: NavController, private alertCtrl: AlertController, 
     private toastCtrl: ToastController) {
+  }
+
+  public findSiswaByNama(event: any) {
+    var input = event.target.value
+
+    var self = this
+    var datasource = new SiswaDatasource()
+    datasource.findsByName(input, {
+      run(siswaList: Array<Siswa>) {
+        self.siswaList = siswaList
+      }
+    })
   }
 
   private loadData() {
