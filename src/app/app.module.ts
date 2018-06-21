@@ -10,33 +10,37 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SQLite } from '@ionic-native/sqlite'
 
 import { MyApp } from './app.component';
+import { SiswaListPageModule } from '../pages/siswa-list/siswa-list.module';
+import { SiswaFormPageModule } from '../pages/siswa-form/siswa-form.module';
+import { DetailSiswaPageModule } from './../pages/detail-siswa/detail-siswa.module';
+import { LoginPageModule } from './../pages/login/login.module';
 
 @NgModule({
   declarations: [
-  
+
     MyApp,
-    LoginPage, 
-    SiswaListPage,
-    SiswaFormPage, 
-    DetailSiswaPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    LoginPageModule,
+    SiswaListPageModule,
+    SiswaFormPageModule,
+    DetailSiswaPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    LoginPage, 
-    SiswaListPage, 
-    SiswaFormPage, 
+    LoginPage,
+    SiswaListPage,
+    SiswaFormPage,
     DetailSiswaPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     SQLite,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })
-export class AppModule {}
+export class AppModule { }
